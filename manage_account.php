@@ -88,7 +88,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include "layout/student_topbar.php"; ?>
         <div class="content" style="max-width:600px; margin:30px auto;">
 
-            <h2>Manage Account</h2>
+            <div class="prev">
+                <h1 style="font-family: 'Nunito', sans-serif;">Manage Account</h1>
+            </div>
 
             <?php if ($message): ?>
                 <div class="alert" style="text-align:center; margin-bottom:15px;">
@@ -113,16 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        name="email" 
                        value="<?= htmlspecialchars($student['email'] ?? ''); ?>" 
                        required>
-
-                <label>New Password</label>
-                <input type="password" 
-                       name="password" 
-                       placeholder="Leave blank to keep current password">
-
-                <label>Confirm Password</label>
-                <input type="password" 
-                       name="confirm_password" 
-                       placeholder="Leave blank to keep current password">
 
                 <div style="margin-top:15px;">
                     <button type="submit">Update Account</button>

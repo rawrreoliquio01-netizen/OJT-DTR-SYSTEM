@@ -92,6 +92,13 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 3px solid transparent;
+    background-image: linear-gradient(#E8E1D5, #E8E1D5), linear-gradient(to bottom, #ffdc7a, #cec043, #d6b600);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 100%;
+    background-size: 100% 100%, 100% 3px;
 }
 
 .topbar h3 {
