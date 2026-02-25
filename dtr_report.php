@@ -33,9 +33,10 @@ $sql = "SELECT
     GROUP_CONCAT(DISTINCT DATE_FORMAT(ts2.time_out, '%h:%i') ORDER BY ts2.time_out SEPARATOR '\n') as afternoon_out,
     GROUP_CONCAT(DISTINCT DATE_FORMAT(ts3.time_in, '%h:%i') ORDER BY ts3.time_in SEPARATOR '\n') as overtime_in,
     GROUP_CONCAT(DISTINCT DATE_FORMAT(ts3.time_out, '%h:%i') ORDER BY ts3.time_out SEPARATOR '\n') as overtime_out,
-    SUM(tr.total_hours) as daily_total,
     GROUP_CONCAT(DISTINCT tr.accomplishment SEPARATOR '\n') as accomplishment,
-    GROUP_CONCAT(DISTINCT tr.supervisor_esig SEPARATOR '\n') as supervisor_signature
+    GROUP_CONCAT(DISTINCT tr.supervisor_esig SEPARATOR '\n') as supervisor_signature,
+    tr.id as record_id,
+    tr.record_date
 FROM time_records tr
 LEFT JOIN time_sessions ts1 ON tr.id = ts1.record_id AND ts1.period = 'AM'
 LEFT JOIN time_sessions ts2 ON tr.id = ts2.record_id AND ts2.period = 'PM'
@@ -47,8 +48,43 @@ ORDER BY tr.record_date ASC";
 $result = mysqli_query($conn, $sql);
 
 $dataRows = [];
+$overtime_limit = "18:15:00";
+
 if ($result && mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
+
+        // ===========================
+        // CALCULATE DAILY TOTAL HOURS
+        // ===========================
+        $sessions = $conn->query("SELECT * FROM time_sessions WHERE record_id='{$row['record_id']}' ORDER BY id ASC");
+        $totalSeconds = 0;
+
+        while($s = $sessions->fetch_assoc()){
+            if($s['time_in'] && $s['time_out']){
+                $timeIn = $s['time_in'];
+                $timeOut = $s['time_out'];
+
+                $regularEnd = $timeOut;
+
+                if($timeOut > $overtime_limit){
+                    if($timeIn < $overtime_limit){
+                        $regularEnd = $overtime_limit;
+                    } else {
+                        $regularEnd = null;
+                    }
+                }
+
+                if($regularEnd){
+                    $duration = strtotime($regularEnd) - strtotime($timeIn);
+                    $totalSeconds += $duration;
+                }
+            }
+        }
+
+        $hours = floor($totalSeconds / 3600);
+        $minutes = floor(($totalSeconds % 3600) / 60);
+        $row['daily_total'] = $hours . "h " . $minutes . "m";
+
         $dataRows[] = $row;
     }
 }
@@ -62,7 +98,7 @@ function truncate($text, $chars = 180) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>OJT Daily Time Record Report</title>
+<title>OJT Daily Time Record Reporttttt</title>
 
 <style>
 @page { 
@@ -271,12 +307,10 @@ tfoot { display: table-footer-group; padding-top: -19px; }
 
         <tbody>
             <?php 
-            // Calculate how many data rows to show (maximum 15)
             $dataCount = count($dataRows);
             $maxRows = 15;
             $dataRowsToShow = min($dataCount, $maxRows);
             
-            // Display data rows (up to 15)
             for ($i = 0; $i < $dataRowsToShow; $i++): 
                 $row = $dataRows[$i];
             ?>
@@ -294,7 +328,6 @@ tfoot { display: table-footer-group; padding-top: -19px; }
             </tr>
             <?php endfor; ?>
             
-            <!-- Add empty rows to complete exactly 15 rows total -->
             <?php 
             $emptyRows = $maxRows - $dataRowsToShow;
             for ($i = 1; $i <= $emptyRows; $i++): 
