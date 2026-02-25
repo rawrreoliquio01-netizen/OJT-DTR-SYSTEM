@@ -386,3 +386,9 @@ h1.welcome {
     margin-bottom: 20px;
     margin-top: -5px;
 }
+
+.table-container {
+    overflow-x: auto;
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
