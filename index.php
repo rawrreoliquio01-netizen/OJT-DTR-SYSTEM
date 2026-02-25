@@ -84,31 +84,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* Your previous styles unchanged */
-body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
-.header{display:flex;justify-content:flex-end;padding:15px 30px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-.header a{text-decoration:none;padding:10px 20px;background:#007bff;color:#fff;border-radius:5px;font-weight:bold;}
+body{font-family: 'Nunito', sans-serif;background:#f0f0f0;margin:0;padding:0;}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.header a{font-family: 'Nunito', sans-serif;text-decoration:none;padding:10px 20px;background:#004d26;color:#fff;border-radius:5px;font-weight:bold;}
 .header a:hover{background:#0056b3;}
-.container{max-width:900px;margin:60px auto;background:#fff;padding:50px;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);position:relative;min-height:400px;}
-.clock-widget{position:absolute;top:40px;left:40px;z-index:10;}
-.main-content{margin-left:360px;max-width:420px;padding:20px;background:#f9f9f9;border-radius:10px;}
-.container h2{text-align:center;margin-bottom:20px;}
-.container form label{display:block;margin-top:10px;margin-bottom:5px;}
-.container form input, .container form select, .container form textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;font-size:16px;transition:border-color 0.3s;}
+.container{max-width:1200px;margin:60px auto;background:#fff;padding:50px;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);position:relative;min-height:500px;}
+.clock-widget{position:absolute;top:80px;left:140px;z-index:10;}
+.main-content{margin-left:480px;max-width:520px;padding:50px;background:#f9f9f9;border-radius:10px;}
+.container h2{font-family: 'Nunito', sans-serif;text-align:center;margin-bottom:20px;}
+.container form label{font-family: 'Nunito', sans-serif;display:block;margin-top:10px;margin-bottom:5px;}
+.container form input, .container form select, .container form textarea{font-family: 'Nunito', sans-serif;width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;font-size:16px;transition:border-color 0.3s;}
 .container form input:focus, .container form select:focus, .container form textarea:focus{border-color:#007bff;outline:none;}
-.container form button{width:100%;margin-top:20px;padding:15px;background:#28a745;color:#fff;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;transition:background 0.3s;}
+.container form button{font-family: 'Nunito', sans-serif;width:100%;margin-top:20px;padding:15px;background:#004d26;color:#fff;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;transition:background 0.3s;}
 .container form button:hover{background:#218838;}
 .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;}
 .modal-content{background:#fff;padding:30px;border-radius:15px;width:450px;box-shadow:0 12px 48px rgba(0,0,0,0.3);animation:slideIn 0.3s ease-out;position:relative;z-index:10000;}
-.modal-content button{padding:10px 20px;margin-right:10px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;transition:all 0.3s;}
+.modal-content button{font-family: 'Nunito', sans-serif;padding:10px 20px;margin-right:10px;border:none;border-radius:8px;cursor:pointer;font-weight:bold;transition:all 0.3s;}
 .modal-content button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
 @keyframes slideIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
 </style>
 </head>
 <body>
 
-<div class="header"><button onclick="openLoginModal()" class="btn-switch">
-            Login
-</button></div>
+<div class="header"><h2 style="font-family: 'Nunito', sans-serif;">PSAU OJT DTR</h2><button onclick="openLoginModal()" style="font-family: 'Nunito', sans-serif; background:#004d26;color:#fff;padding:10px 20px;border:none;border-radius:5px;font-weight:bold;cursor:pointer;transition:all 0.3s;"
+            onmouseover="this.style.background='#003d1e'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 77, 38, 0.3)';"
+            onmouseout="this.style.background='#004d26'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Login</button></div>
 
 
 
@@ -121,17 +121,19 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
     </div>
 
     <div class="main-content">
-        <h2>PSAU OJT DTR hatdog</h2>
+        <h2 style="font-family: 'Nunito', sans-serif;">Welcome to I-Café!</h2>
         <form method="POST">
             <label>Student Number</label>
             <input type="text" name="student_number" required>
-            <button type="submit" name="save">Save</button>
+            <button type="submit" name="save" style="width:100%;margin-top:20px;padding:15px;background:#004d26;color:#fff;border:none;border-radius:8px;font-weight:bold;cursor:pointer;font-size:16px;transition:all 0.3s;"
+                    onmouseover="this.style.background='#003d1e'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 77, 38, 0.3)';"
+                    onmouseout="this.style.background='#004d26'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Save</button>
         </form>
 
-        <p style="text-align:center;margin-top:30px;">Current Period: <b><?= $currentPeriod ?></b></p>
+        <p style="font-family: 'Nunito', sans-serif; text-align:center;margin-top:30px;">Current Period: <b><?= $currentPeriod ?></b></p>
 
         <?php if(isset($_SESSION['flash_message'])): ?>
-        <p style="text-align:center;color:green;font-weight:bold;">
+        <p style="font-family: 'Nunito', sans-serif; text-align:center;color:green;font-weight:bold;">
             <?= htmlspecialchars($_SESSION['flash_message']) ?>
         </p>
         <?php unset($_SESSION['flash_message']); ?>
@@ -141,16 +143,20 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
 
 <div id="switchAccountModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);">
     <div style="background: white; margin: 12% auto; padding: 30px; width: 350px; border-radius: 15px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        <h3 style="margin-top: 0; color: #2c3e50;">Log to your Account</h3>
-        <p style="color: #7f8c8d; font-size: 14px;">Please enter your Student Number:</p>
+        <h3 style="font-family: 'Nunito', sans-serif; margin-top: 0; color: #2c3e50;">Log to your Account</h3>
+        <p style="font-family: 'Nunito', sans-serif; color: #7f8c8d; font-size: 14px;">Please enter your Student Number:</p>
         
         <form action="switch_handler.php" method="POST">
             <input type="text" name="new_student_number" required placeholder="Student Number (e.g. 202100919)" 
-                   style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+                   style="font-family: 'Nunito', sans-serif; width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
             
             <div style="display: flex; gap: 10px;">
-                <button type="submit" style="flex: 1; background: #5d7c6d; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold;">Login</button>
-                <button type="button" onclick="closeLoginModal()" style="flex: 1; background: #e74c3c; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer;">Cancel</button>
+                <button class="btn-login" type="submit" style="font-family: 'Nunito', sans-serif; flex: 1; background: #004d26; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;" 
+                        onmouseover="this.style.background='#003d1e'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 77, 38, 0.3)';" 
+                        onmouseout="this.style.background='#004d26'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Login</button>
+                <button class="btn-cancel" type="button" onclick="closeLoginModal()" style="font-family: 'Nunito', sans-serif; flex: 1; background: #ff0000; color: white; border: none; padding: 12px; border-radius: 8px; cursor: pointer; transition: all 0.3s;" 
+                        onmouseover="this.style.background='#cc0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(255, 0, 0, 0.3)';" 
+                        onmouseout="this.style.background='#ff0000'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Cancel</button>
             </div>
         </form>
     </div>
