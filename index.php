@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 <link rel="stylesheet" href="css/style.css">
 <style>
 /* Your previous styles unchanged */
-body{font-family: 'Nunito', sans-serif;background:#f0f0f0;margin:0;padding:0;}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+body{font-family: 'Nunito', sans-serif;background:#F5F1E8;margin:0;padding:0;}
+.header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#E8E1D5;box-shadow:0 2px 5px rgba(0,0,0,0.1);border-bottom:3px solid transparent;background-image:linear-gradient(#E8E1D5, #E8E1D5), linear-gradient(90deg, #FFD700, #FFEB3B, #FFD700);background-origin:border-box;background-clip:padding-box, border-box;background-repeat:no-repeat;background-position:0 0, 0 100%;background-size:100% 100%, 100% 3px;}
 .header a{font-family: 'Nunito', sans-serif;text-decoration:none;padding:10px 20px;background:#004d26;color:#fff;border-radius:5px;font-weight:bold;}
 .header a:hover{background:#0056b3;}
 .container{max-width:1200px;margin:60px auto;background:#fff;padding:50px;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);position:relative;min-height:500px;}
