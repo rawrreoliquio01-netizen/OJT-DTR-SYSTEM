@@ -121,7 +121,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
     </div>
 
     <div class="main-content">
-        <h2>PSAU OJT DTR!njunu</h2>
+        <h2>PSAU OJT DTR!njunasdasdu</h2>
         <form method="POST">
             <label>Student Number</label>
             <input type="text" name="student_number" required>
