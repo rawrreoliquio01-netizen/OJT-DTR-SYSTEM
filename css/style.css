@@ -16,7 +16,7 @@
 }
 
 body {
-    font-family: "Segoe UI", sans-serif;
+    font-family: "Nunito", sans-serif;
     background-color: #F5F1E8; /* beige */
     color: #3A3A3A;
 }
@@ -39,7 +39,7 @@ body {
 /* ================= SIDEBAR ================= */
 .sidebar {
     width: 250px;
-    background: #0d1f00;
+    background: #004d26;
     color: #ffffff;
     height: 100vh;
     padding-top: 25px;
@@ -129,7 +129,7 @@ body {
 }
 
 .btn-switch {
-    background: #caa607;
+    background: #004d26 !important;
     color: #f7f6f6;
     padding: 8px 16px;
     border: none;
@@ -140,7 +140,10 @@ body {
     font-weight: 600;
 }
 
-
+.btn-switch:hover {
+    background: #218838 !important;
+    color: #f7f6f6;
+}
 
 .btn-logout {
     background-color: #dc3545;
@@ -176,6 +179,7 @@ form:has(.time-in),
 form:has(.time-out) {
     background-color: transparent;
     padding: 0;
+    border-radius: 6px;
     box-shadow: none;
 }
 
@@ -248,7 +252,7 @@ th, td {
 }
 
 th {
-    background: #122700;
+    background: #004d26;
     color: #ffffff;
     text-align: left;
     font-weight: 600;
@@ -346,7 +350,7 @@ h1.welcome {
 }
 
 .btn-generate-report {
-    background: #0e491c !important;
+    background: #004d26 !important;
     color: #fffafa;
     padding: 12px 30px;
     font-size: 16px;
@@ -387,8 +391,15 @@ h1.welcome {
     margin-top: -5px;
 }
 
-.table-container {
-    overflow-x: auto;
-    margin-bottom: 20px;
-    margin-left: -20px;
+/* ================= MODAL BUTTON STYLES ================= */
+.modal-content button[type="submit"] {
+    background: #004d26 !important;
+    color: white !important;
+    font-family: "Nunito", sans-serif;
+}
+
+.modal-content button[type="button"] {
+    background: #ff0000 !important;
+    color: white !important;
+    font-family: "Nunito", sans-serif;
 }
