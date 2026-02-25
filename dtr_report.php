@@ -11,11 +11,16 @@ if (!isset($_SESSION['student_number'])) {
 $student_number = $_SESSION['student_number'];
 $student_name = $_SESSION['student_name'] ?? '';
 
-// Get student information
-$stmt = $conn->prepare("SELECT first_name, last_name, college_department, program, email, contact_number, start_date, end_date FROM students WHERE student_number = ?");
+// Get student information (removed end_date, hrs_needed, remaining_hours)
+$stmt = $conn->prepare("SELECT first_name, last_name, company, department_office, email, contact_number, start_date FROM students WHERE student_number = ?");
+if (!$stmt) {
+    die("Prepare failed: " . $conn->error);
+}
+
 $stmt->bind_param("s", $student_number);
 $stmt->execute();
 $student_info = $stmt->get_result()->fetch_assoc();
+$stmt->close();
 
 $date_from = $_GET['date_from'] ?? '';
 $date_to   = $_GET['date_to'] ?? '';
@@ -98,137 +103,38 @@ function truncate($text, $chars = 180) {
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>OJT Daily Time Record Reporttttt</title>
-
+<title>OJT Daily Time Record Report</title>
 <style>
 @page { 
     size: A4 landscape; 
     margin: 5mm;
 }
-
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial;
-}
-
-body { 
-    background: #525659; 
-    display: flex;
-    justify-content: center;
-    padding-top: 20px;
-}
-
-.page-canvas {
-    width: 297mm;
-    background: #fff;
-    padding: 8mm; 
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    box-sizing: border-box;
-}
-
-table.tbl-main {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-
+html, body { height: 100%; margin: 0; padding: 0; font-family: Arial; }
+body { background: #525659; display: flex; justify-content: center; padding-top: 20px; }
+.page-canvas { width: 297mm; background: #fff; padding: 8mm; box-shadow: 0 0 15px rgba(0,0,0,0.3); box-sizing: border-box; }
+table.tbl-main { width: 100%; border-collapse: collapse; }
 thead { display: table-header-group; }
 tfoot { display: table-footer-group; padding-top: -19px; }
-
-.tbl-main th, .tbl-main td {
-    border: 1px solid #000;
-    font-size: 9pt;
-    word-wrap: break-word;
-    text-align: center;
-    vertical-align: middle;
-    white-space: normal;
-    line-height: 10px;
-    height: 20px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.tbl-main td.accomplishment {
-    font-size: 6pt;
-    white-space: normal;
-    word-break: break-word;
-    line-height: 9px;
-}
-
-.tbl-main td.signature {
-    font-size: 7pt;
-    white-space: normal;
-    word-break: break-word;
-    line-height: 9px;
-}
-
-.tbl-main td[contenteditable="true"] {
-    outline: none;
-    border: 1px solid #000;
-    background: #fff;
-    line-height: 20px;
-}
-
-.tbl-main th { 
-    background: #eaeaea; 
-    font-weight: bold; 
-    line-height: 12px;
-    border: 2px solid #000 !important;
-}
-.days, .day, .total {
-    line-height: 20px !important;
-}
+.tbl-main th, .tbl-main td { border: 1px solid #000; font-size: 9pt; word-wrap: break-word; text-align: center; vertical-align: middle; white-space: normal; line-height: 10px; height: 20px; overflow: hidden; text-overflow: ellipsis; }
+.tbl-main td.accomplishment { font-size: 6pt; white-space: normal; word-break: break-word; line-height: 9px; }
+.tbl-main td.signature { font-size: 7pt; white-space: normal; word-break: break-word; line-height: 9px; }
+.tbl-main td[contenteditable="true"] { outline: none; border: 1px solid #000; background: #fff; line-height: 20px; }
+.tbl-main th { background: #eaeaea; font-weight: bold; line-height: 12px; border: 2px solid #000 !important; }
+.days, .day, .total { line-height: 20px !important; }
 .days      { width: 3%; }
 .day      { width: 8%; }
 .total      { width: 4%; }
 .accomplishment { width: 45%; }
 .signature { width: 31%; }
 .iso-header { width: 100%; }
-
-.header-title {
-    font-size: 14pt;
-    font-weight: bold;
-    text-align: center;
-    background: #eaeaea;
-    border: 1px solid #000;
-    border-bottom: none;
-    padding: 6px;
-    margin-top: 5px;
-}
-
-.iso-footer-content {
-    font-size: 8pt;
-    display: flex;
-    justify-content: space-between;
-}
-
-.print-btn { 
-    position: fixed; 
-    top: 20px; 
-    right: 40px; 
-    z-index: 100; 
-}
-.print-btn button { 
-    padding: 10px 20px; 
-    cursor: pointer; 
-    background: #b9a80eff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    font-weight: bold; 
-}
-
+.header-title { font-size: 14pt; font-weight: bold; text-align: center; background: #eaeaea; border: 1px solid #000; border-bottom: none; padding: 6px; margin-top: 5px; }
+.iso-footer-content { font-size: 8pt; display: flex; justify-content: space-between; }
+.print-btn { position: fixed; top: 20px; right: 40px; z-index: 100; }
+.print-btn button { padding: 10px 20px; cursor: pointer; background: #b9a80eff; color: white; border: none; border-radius: 5px; font-weight: bold; }
 @media print {
     body { background: none; padding: 0; }
     .print-btn { display: none; }
-    .page-canvas { 
-        width: 100%; 
-        box-shadow: none; 
-        margin: 0;
-        padding: 5mm;
-    }
+    .page-canvas { width: 100%; box-shadow: none; margin: 0; padding: 5mm; }
     tr { page-break-inside: avoid; } 
 }
 </style>
@@ -271,15 +177,15 @@ tfoot { display: table-footer-group; padding-top: -19px; }
                                     <span style="font-size: 10pt;"> <b>Student Name: </b><b><u><?= strtoupper(htmlspecialchars($student_info['first_name'] . ' ' . $student_info['last_name'] ?? '________________________________________')) ?></u></b> </span>
                                 </td>
                                 <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Company: </b><b><u>____________________________________________________</u></b> </span>
+                                    <span style="font-size: 10pt;"> <b>Company: </b><b><u><?= strtoupper(htmlspecialchars($student_info['company'] ?? '____________________________________________________')) ?></u></b> </span>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Course, Yr. & Sec: </b><b><u><?= strtoupper(htmlspecialchars($student_info['program'] ?? '_____________________________________')) ?></u></b> </span>
+                                    <span style="font-size: 10pt;"> <b>Course, Yr. & Sec: </b><b><u></u></b> </span>
                                 </td>
                                 <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Department/Office: </b><b><u><?= strtoupper(htmlspecialchars($student_info['college_department'] ?? '_____________________________________________')) ?></u></b> </span>
+                                    <span style="font-size: 10pt;"> <b>Department/Office: </b><b><u><?= strtoupper(htmlspecialchars($student_info['department_office'] ?? '_____________________________________________')) ?></u></b> </span>
                                 </td>
                             </tr>
                         </table>

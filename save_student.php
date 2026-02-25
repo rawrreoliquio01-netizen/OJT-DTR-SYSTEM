@@ -11,14 +11,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     $email = $_POST['email'] ?? null;
     $contact_number = $_POST['contact_number'] ?? null;
     $start_date = $_POST['start_date'] ?? null;
-    $end_date = $_POST['end_date'] ?? null;
+
+    // New fields
+    $hrs_needed = $_POST['hrs_needed'] ?? 0;
+    $company = $_POST['company'] ?? null;
+    $department_office = $_POST['department_office'] ?? null;
 
     // Default password
     $defaultPassword = 'ojt2026';
     $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO students (student_number, first_name, last_name, program, college_department, email, contact_number, start_date, end_date, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssss", $student_number, $first_name, $last_name, $program, $college_department, $email, $contact_number, $start_date, $end_date, $hashedPassword);
+    $stmt = $conn->prepare("INSERT INTO students (student_number, first_name, last_name, program, college_department, email, contact_number, start_date, hrs_needed, company, department_office, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param(
+        "ssssssssisss",
+        $student_number,
+        $first_name,
+        $last_name,
+        $program,
+        $college_department,
+        $email,
+        $contact_number,
+        $start_date,
+        $hrs_needed,
+        $company,
+        $department_office,
+        $hashedPassword
+    );
 
     if($stmt->execute()){
         header("Location: view_students.php");
