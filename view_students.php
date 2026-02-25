@@ -2,8 +2,15 @@
 $pageTitle = "View OJT Students";
 include "config/db.php";
 
-// Fetch all students
-$students = $conn->query("SELECT * FROM students ORDER BY id ASC");
+// Fetch all students with calculated remaining hours
+$students = $conn->query("
+    SELECT s.*, 
+           COALESCE(s.hrs_needed - SUM(t.total_hours), s.hrs_needed) AS remaining_hours
+    FROM students s
+    LEFT JOIN time_records t ON s.student_number = t.student_number
+    GROUP BY s.student_number
+    ORDER BY s.id ASC
+");
 ?>
 
 <!DOCTYPE html>
@@ -48,13 +55,24 @@ $students = $conn->query("SELECT * FROM students ORDER BY id ASC");
                         <th>Program</th>
                         <th>Email</th>
                         <th>Contact</th>
-                        <th>Start</th>
-                        <th>End</th>
+                        <th>Start Date</th>
+                        <th>Total Hours Needed</th>
+                        <th>Remaining Hours</th>
+                        <th>Company</th>
+                        <th>Department / Office</th>
                         <th>Operations</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php while($row = $students->fetch_assoc()): ?>
+                    <?php while($row = $students->fetch_assoc()): 
+                        // Format hrs_needed
+                        $hrs_needed_hours = floor($row['hrs_needed']);
+                        $hrs_needed_minutes = round(($row['hrs_needed'] - $hrs_needed_hours) * 60);
+
+                        // Format remaining_hours
+                        $rem_hours = floor($row['remaining_hours']);
+                        $rem_minutes = round(($row['remaining_hours'] - $rem_hours) * 60);
+                    ?>
                     <tr data-college="<?= htmlspecialchars(explode(' - ', $row['college_department'])[0]) ?>">
                         <td><?= $row['id'] ?></td>
                         <td><?= $row['student_number'] ?></td>
@@ -64,7 +82,10 @@ $students = $conn->query("SELECT * FROM students ORDER BY id ASC");
                         <td><?= $row['email'] ?></td>
                         <td><?= $row['contact_number'] ?></td>
                         <td><?= $row['start_date'] ?></td>
-                        <td><?= $row['end_date'] ?></td>
+                        <td><?= $hrs_needed_hours ?>h <?= $hrs_needed_minutes ?>m</td>
+                        <td><?= $rem_hours ?>h <?= $rem_minutes ?>m</td>
+                        <td><?= $row['company'] ?></td>
+                        <td><?= $row['department_office'] ?></td>
                         <td>
                             <button class="update-btn" data-id="<?= $row['id'] ?>">Update</button>
                             <button class="delete-btn" data-id="<?= $row['id'] ?>">Delete</button>
