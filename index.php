@@ -89,7 +89,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
 .header a{text-decoration:none;padding:10px 20px;background:#007bff;color:#fff;border-radius:5px;font-weight:bold;}
 .header a:hover{background:#0056b3;}
 .container{max-width:900px;margin:60px auto;background:#fff;padding:50px;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);position:relative;min-height:400px;}
-.clock-widget{position:absolute;top:20px;left:40px;z-index:10;}
+.clock-widget{position:absolute;top:40px;left:40px;z-index:10;}
 .main-content{margin-left:360px;max-width:420px;padding:20px;background:#f9f9f9;border-radius:10px;}
 .container h2{text-align:center;margin-bottom:20px;}
 .container form label{display:block;margin-top:10px;margin-bottom:5px;}
@@ -121,7 +121,7 @@ body{font-family:Arial,sans-serif;background:#f0f0f0;margin:0;padding:0;}
     </div>
 
     <div class="main-content">
-        <h2>PSAU OJT DTR! camille</h2>
+        <h2>PSAU OJT DTR YAWA</h2>
         <form method="POST">
             <label>Student Number</label>
             <input type="text" name="student_number" required>
