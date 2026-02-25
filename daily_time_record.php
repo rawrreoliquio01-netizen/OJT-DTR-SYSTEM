@@ -12,6 +12,7 @@ if (!$student_number) {
 }
 
 $date_today = date('Y-m-d');
+$overtime_limit = "18:15:00";
 
 /* ==========================================
    HANDLE TIME OUT + ACCOMPLISHMENT SAVE
@@ -61,7 +62,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
     <style>
         .container{ padding: 20px; }
         .table-container { overflow-x: auto; margin-bottom: 20px; }
-        .table-container table { min-width: 800px; border-collapse: collapse; width:100%; background:white; }
+        .table-container table { min-width: 900px; border-collapse: collapse; width:100%; background:white; }
         .table-container th, .table-container td { padding: 12px; border: 1px solid #ddd; text-align: left; }
 
         .modal {
@@ -106,6 +107,11 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
             box-sizing: border-box;
             resize: none;
         }
+
+        .overtime {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -119,11 +125,9 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
             <button onclick="window.location.href='dtr_report.php'" class="btn-generate-report">
                 Generate DTR Record
             </button>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                
-                <div class="prev">
-                    <h1>Previous Records</h1>
-                </div>
+
+            <div class="prev">
+                <h1>Previous Records</h1>
             </div>
 
             <div class="table-container">
@@ -133,6 +137,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
                             <th>Date</th>
                             <th>AM Sessions</th>
                             <th>PM Sessions</th>
+                            <th>Overtime Sessions</th>
                             <th>Total Hours</th>
                             <th>Accomplishment</th>
                             <th>Action</th>
@@ -142,20 +147,57 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
                         <?php while($r = $records->fetch_assoc()): ?>
                             <?php
                             $dailySessions = $conn->query("SELECT * FROM time_sessions WHERE record_id='{$r['id']}' ORDER BY id ASC");
-                            $amList = []; $pmList = []; $totalSeconds = 0;
+
+                            $amList = [];
+                            $pmList = [];
+                            $overtimeList = [];
+                            $totalSeconds = 0;
                             $active_session_id = null;
 
                             while($s = $dailySessions->fetch_assoc()){
+
                                 if($s['time_in'] && $s['time_out']){
-                                    $duration = strtotime($s['time_out']) - strtotime($s['time_in']);
-                                    $totalSeconds += $duration;
+
+                                    $timeIn  = $s['time_in'];
+                                    $timeOut = $s['time_out'];
+
+                                    // Regular duration
+                                    $regularEnd = $timeOut;
+
+                                    if($timeOut > $overtime_limit){
+
+                                        if($timeIn < $overtime_limit){
+                                            $regularEnd = $overtime_limit;
+
+                                            $overtimeList[] =
+                                                date('h:i A', strtotime($overtime_limit)) .
+                                                " - " .
+                                                date('h:i A', strtotime($timeOut));
+                                        } else {
+                                            $regularEnd = null;
+
+                                            $overtimeList[] =
+                                                date('h:i A', strtotime($timeIn)) .
+                                                " - " .
+                                                date('h:i A', strtotime($timeOut));
+                                        }
+                                    }
+
+                                    if($regularEnd){
+                                        $duration = strtotime($regularEnd) - strtotime($timeIn);
+                                        $totalSeconds += $duration;
+
+                                        $formatted = date('h:i A', strtotime($timeIn)) .
+                                                     " - " .
+                                                     date('h:i A', strtotime($regularEnd));
+
+                                        if($s['period']=='AM') $amList[] = $formatted;
+                                        if($s['period']=='PM') $pmList[] = $formatted;
+                                    }
+
                                 } else {
                                     $active_session_id = $s['id'];
                                 }
-
-                                $formatted = $s['time_in'] ? date('h:i A', strtotime($s['time_in'])) . ($s['time_out'] ? " - ".date('h:i A', strtotime($s['time_out'])) : " - ...") : '';
-                                if($s['period']=='AM') $amList[] = $formatted;
-                                if($s['period']=='PM') $pmList[] = $formatted;
                             }
 
                             $totalHours = floor($totalSeconds / 3600);
@@ -167,6 +209,9 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
                                 <td><?= $r['record_date']; ?></td>
                                 <td><?= !empty($amList) ? implode("<br>", $amList) : '-'; ?></td>
                                 <td><?= !empty($pmList) ? implode("<br>", $pmList) : '-'; ?></td>
+                                <td class="overtime">
+                                    <?= !empty($overtimeList) ? implode("<br>", $overtimeList) : '-'; ?>
+                                </td>
                                 <td><?= $totalHours ?>h <?= $totalMinutes ?>m</td>
                                 <td><?= htmlspecialchars($r['accomplishment'] ?? '-'); ?></td>
                                 <td>
@@ -202,8 +247,6 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
         </form>
     </div>
 </div>
-
-
 
 </body>
 </html>
