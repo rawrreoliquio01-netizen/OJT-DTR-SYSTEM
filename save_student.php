@@ -1,48 +1,70 @@
 <?php
 include "config/db.php";
 
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // ===== BASIC INFO =====
     $student_number = $_POST['student_number'];
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
-    $college_select = $_POST['college_select'];
+    $college_department = $_POST['college_department']; // FIXED name
     $program = $_POST['program'];
-    $college_department = $college_select . ' - ' . $program;
-    $email = $_POST['email'] ?? null;
-    $contact_number = $_POST['contact_number'] ?? null;
-    $start_date = $_POST['start_date'] ?? null;
+    $section = $_POST['section'];
 
-    // New fields
-    $hrs_needed = $_POST['hrs_needed'] ?? 0;
-    $company = $_POST['company'] ?? null;
-    $department_office = $_POST['department_office'] ?? null;
+    $email = !empty($_POST['email']) ? $_POST['email'] : null;
+    $contact_number = !empty($_POST['contact_number']) ? $_POST['contact_number'] : null;
+    $start_date = $_POST['start_date'];
 
-    // Default password
+    // ===== HOURS =====
+    $hrs_needed = (int) $_POST['hrs_needed'];
+    $remaining_hours = $hrs_needed;
+
+    // ===== COMPANY INFO =====
+    $company = $_POST['company'];
+    $department_office = $_POST['department_office'];
+
+    // ===== DEFAULT PASSWORD =====
     $defaultPassword = 'ojt2026';
     $hashedPassword = password_hash($defaultPassword, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO students (student_number, first_name, last_name, program, college_department, email, contact_number, start_date, hrs_needed, company, department_office, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    // ===== PREPARE QUERY (SECTION ADDED) =====
+    $stmt = $conn->prepare("
+        INSERT INTO students 
+        (student_number, password, first_name, last_name, college_department, program, section, email, contact_number, start_date, hrs_needed, remaining_hours, company, department_office) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ");
+
+    if (!$stmt) {
+        die("Prepare failed: " . $conn->error);
+    }
+
+    // 12 strings + 2 integers = 14 total
     $stmt->bind_param(
-        "ssssssssisss",
+        "ssssssssssiiss",
         $student_number,
+        $hashedPassword,
         $first_name,
         $last_name,
-        $program,
         $college_department,
+        $program,
+        $section,
         $email,
         $contact_number,
         $start_date,
         $hrs_needed,
+        $remaining_hours,
         $company,
-        $department_office,
-        $hashedPassword
+        $department_office
     );
 
-    if($stmt->execute()){
+    if ($stmt->execute()) {
         header("Location: view_students.php");
-        exit;
+        exit();
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Execute Error: " . $stmt->error;
     }
+
+    $stmt->close();
+    $conn->close();
 }
 ?>
