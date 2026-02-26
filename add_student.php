@@ -31,7 +31,7 @@ include "config/db.php";
                 <input type="text" name="last_name" required>
 
                 <label>College / Department</label>
-                <select name="college_select" id="college_select" required>
+                <select name="college_department" id="college_department" required>
                     <option value="" disabled selected>Select College / Department</option>
                     
                     <optgroup label="College of Agricultural Systems and Technology (CASTech)">
@@ -96,6 +96,10 @@ include "config/db.php";
                     <!-- CVM Programs -->
                     <option value="Doctor of Veterinary Medicine" data-college="CVM">Doctor of Veterinary Medicine</option>
                 </select>
+                
+                <!-- ✅ NEW SECTION FIELD -->
+                <label>Section</label>
+                <input type="text" name="section" placeholder="e.g. 3A / IT-4B / Block 1" required>
 
                 <label>Email</label>
                 <input type="email" name="email">

@@ -5,7 +5,7 @@ include "config/db.php";
 // Fetch all students with calculated remaining hours
 $students = $conn->query("
     SELECT s.*, 
-           COALESCE(s.hrs_needed - SUM(t.total_hours), s.hrs_needed) AS remaining_hours
+           COALESCE(s.hrs_needed - SUM(t.hrs_needed), s.hrs_needed) AS remaining_hours
     FROM students s
     LEFT JOIN time_records t ON s.student_number = t.student_number
     GROUP BY s.student_number
@@ -53,6 +53,7 @@ $students = $conn->query("
                         <th>Name</th>
                         <th>College / Department</th>
                         <th>Program</th>
+                        <th>Section</th>
                         <th>Email</th>
                         <th>Contact</th>
                         <th>Start Date</th>
@@ -79,6 +80,7 @@ $students = $conn->query("
                         <td><?= $row['first_name'] . " " . $row['last_name'] ?></td>
                         <td><?= $row['college_department'] ?></td>
                         <td><?= $row['program'] ?></td>
+                        <td><?= $row['section'] ?></td>
                         <td><?= $row['email'] ?></td>
                         <td><?= $row['contact_number'] ?></td>
                         <td><?= $row['start_date'] ?></td>

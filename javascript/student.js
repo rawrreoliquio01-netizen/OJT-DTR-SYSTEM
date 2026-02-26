@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const collegeSelect = document.getElementById('college_select');
+    const collegeSelect = document.getElementById('college_department');
     const programSelect = document.getElementById('program_select');
 
     // Initially hide all program options except the default
