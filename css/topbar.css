@@ -1,0 +1,84 @@
+/* =========================
+   TOPBAR STYLES
+   ========================= */
+
+.topbar {
+    background-color: var(--dark-beige);
+    padding: 15px 35px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid transparent;
+    background-image: linear-gradient(var(--dark-beige), var(--dark-beige)), linear-gradient(to bottom, #ffdc7a, #cec043, #d6b600);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 100%;
+    background-size: 100% 100%, 100% 3px;
+}
+
+.topbar h3 {
+    font-weight: 600;
+}
+
+.topbar span {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.topbar-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Topbar Buttons */
+.btn-back {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-back:hover {
+    background-color: #5a6268;
+    color: white;
+    text-decoration: none;
+}
+
+.btn-switch {
+    background: var(--primary-green) !important;
+    color: #f7f6f6;
+    padding: 8px 16px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-switch:hover {
+    background: #218838 !important;
+    color: #f7f6f6;
+}
+
+.btn-logout {
+    background-color: #da0e0eff;
+    color: #f7f6f6;
+    padding: 8px 16px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #ff0000ff ;
+    color: white;
+}

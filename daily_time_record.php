@@ -58,7 +58,13 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 <html>
 <head>
     <title>Daily Time Record</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/student_topbar.css">
     <link rel="stylesheet" href="css/daily_time_record.css">
 </head>

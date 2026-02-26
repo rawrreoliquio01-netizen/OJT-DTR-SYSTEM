@@ -1,0 +1,70 @@
+/* =========================
+   BUTTON STYLES
+   ========================= */
+
+/* Base Button Styles */
+button {
+    background: #0e6624;
+    color: #f7f7f7;
+    padding: 8px 16px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
+}
+
+.btn {
+    background: linear-gradient(135deg, var(--bright-green) 0%, var(--vibrant-green) 100%);
+    color: var(--dark-text);
+    padding: 8px 16px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
+}
+
+.btn:hover {
+    background: linear-gradient(135deg, var(--vibrant-green) 0%, #00CC30 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 255, 65, 0.4);
+}
+
+/* Button Base Font Styling */
+button,
+.btn,
+.btn-back,
+.btn-switch,
+.btn-logout,
+.btn-update,
+.btn-cancel,
+.btn-manage,
+.btn-timeout,
+.update-btn,
+.delete-btn {
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 12px 24px;
+}
+
+/* Manage Account Button */
+.btn-manage {
+    background: linear-gradient(135deg, var(--bright-green) 0%, var(--vibrant-green) 100%);
+    color: var(--dark-text);
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-manage:hover {
+    background: linear-gradient(135deg, var(--vibrant-green) 0%, #00CC30 100%);
+    transform: translateY(-2px);
+}

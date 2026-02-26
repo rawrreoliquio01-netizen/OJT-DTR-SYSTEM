@@ -1,0 +1,44 @@
+/* =========================
+   SIDEBAR STYLES
+   ========================= */
+
+.sidebar {
+    width: 250px;
+    background: var(--primary-green);
+    color: #ffffff;
+    height: 100vh;
+    padding-top: 25px;
+    position: fixed;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 35px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 25px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+.sidebar a:hover {
+    background: linear-gradient(90deg, #108b2f88 0%, #05ad2c9a 100%);
+    color: white;
+}
+
+.sidebar a.active {
+    background: linear-gradient(90deg, #108b2f 0%, #05ad2d 100%);
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 255, 65, 0.3);
+}

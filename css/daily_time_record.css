@@ -25,6 +25,35 @@
     text-align: left;
 }
 
+/* Report Button */
+.report-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.btn-generate-report {
+    background: #0c0fb9ff !important;
+    color: #fffafa;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: 600;
+    display: flex;
+    margin-left: auto;
+    margin-top: 1rem;
+}
+
+.btn-generate-report:hover {
+    background: #1946dbff !important;
+    color: #f7f6f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
+}
+
 /* Modal */
 .modal {
     display: none;
@@ -66,37 +95,6 @@
 .btn-timeout:disabled {
     background: #aaa;
     cursor: not-allowed;
-}
-
-.btn-generate-report {
-    background: #0c0fb9ff !important;
-    color: #fffafa;
-    padding: 12px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 600;
-    display: flex;
-    margin-left: auto;
-    margin-top: 1rem;
-}
-
-.btn-generate-report:hover {
-    background: #1946dbff !important;
-    color: #f7f6f6;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-}
-
-.btn-cancel {
-    background: #ff0000ff;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 }
 
 /* Textarea */

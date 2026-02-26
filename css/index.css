@@ -1,12 +1,5 @@
 /* ================= INDEX PAGE STYLES ================= */
 
-/* Base */
-body {
-    background: #F5F1E8;
-    margin: 0;
-    padding: 0;
-}
-
 /* Header */
 .header {
     display: flex;
@@ -64,7 +57,8 @@ body {
     border: none;
 }
 
-.clock-widget .date-container {
+.clock-widget .date-container,
+.clock-time-container {
     margin-top: 35px;
     text-align: center;
 }
@@ -78,7 +72,8 @@ body {
     border-radius: 10px;
 }
 
-.main-content h2 {
+.main-content h2,
+.welcome-title {
     text-align: center;
     margin-bottom: 20px;
     font-family: "Nunito", sans-serif;
@@ -126,13 +121,15 @@ body {
 }
 
 /* Info Text */
-.info-text {
+.info-text,
+.period-text {
     font-family: "Nunito", sans-serif;
     text-align: center;
     margin-top: 30px;
 }
 
-.success-message {
+.success-message,
+.flash-message {
     font-family: "Nunito", sans-serif;
     text-align: center;
     color: green;
@@ -216,56 +213,80 @@ body {
     }
 }
 
-/* Buttons */
-.btn-switch {
-    background: #004d26;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-switch:hover {
-    background: #003d1e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-}
-
+/* Login Button Specific */
 .btn-login {
-    background: #004d26;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
+    background: #004d26 !important;
+    color: #fff !important;
 }
 
-.btn-login:hover {
-    background: #003d1e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-}
-
+/* Cancel Button */
 .btn-cancel {
-    background: #ff0000;
-    color: #fff;
+    background-color: #da0e0eff;
+    color: #f7f6f6;
     border: none;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 8px 16px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: 0.3s;
+    font-size: 18px;
+    text-decoration: none;
 }
 
 .btn-cancel:hover {
-    background: #cc0000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+    background-color: #ff0000ff;
+    color: white;
 }
 
 /* Login Modal Specific */
-#switchAccountModal {
+#switchAccountModal,
+.switch-account-modal {
     display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.switch-account-modal .modal-box {
+    background: white;
+    margin: 12% auto;
+    padding: 30px;
+    width: 350px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.switch-account-modal .modal-title {
+    font-family: "Nunito", sans-serif;
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.switch-account-modal .modal-subtitle {
+    font-family: "Nunito", sans-serif;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.switch-account-modal .modal-input {
+    font-family: "Nunito", sans-serif;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-actions button {
+    flex: 1;
 }

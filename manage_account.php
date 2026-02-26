@@ -60,92 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title><?= $pageTitle; ?></title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/buttons.css">
     <link rel="stylesheet" href="css/student_topbar.css">
-    <style>
-        .container { 
-            padding: 20px; 
-        }
-
-        /* Title stays on the left */
-        .prev {
-            text-align: left;
-            margin-bottom: 20px;
-        }
-
-        /* Centering the form block on the page */
-        .form-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 40px 0;
-            width: 100%;
-        }
-
-        .form-container {
-            width: 700px;
-            max-width: 90%;
-            background: #fff;
-            padding: 50px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: 600;
-            font-family: 'Nunito', sans-serif;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 0;
-            box-sizing: border-box;
-        }
-
-        .btn-group {
-            margin-top: 25px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-update {
-            background: #004d26;
-            color: #f7f6f6;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-update:hover {
-            background: #218838;
-            color: #f7f6f6;
-        }
-
-        .btn-cancel {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            background: #cc0000;
-            border-radius: 6px;
-            transition: 0.3s;
-        }
-
-        .btn-cancel:hover {
-            background: #ff0000;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="css/manage_account.css">
 </head>
 <body>
 
@@ -160,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
 
             <?php if ($message): ?>
-                <div style="display: flex; justify-content: center;">
-                    <div class="alert" style="width: 100%; max-width: 600px; text-align: center; margin-bottom: 15px; background: #e7f3fe; color: #0c5460; padding: 10px; border-radius: 5px;">
+                <div class="alert-container">
+                    <div class="alert">
                         <?= htmlspecialchars($message); ?>
                     </div>
                 </div>
@@ -174,19 +97,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        <label>Student Number</label>
                     <input type="text" 
                            value="<?= htmlspecialchars($student_number); ?>" 
-                           readonly style="background-color: #eee;">
+                           readonly class="readonly-input">
 
                     <label>Name</label>
                     <input type="text" 
                            value="<?= htmlspecialchars($student_name); ?>" 
-                           readonly style="background-color: #eee;">
+                           readonly class="readonly-input">
 
                     <label>Email</label>
                     <input type="email" 
                            name="email" 
                            value="<?= htmlspecialchars($student['email'] ?? ''); ?>" 
                            required>
-                    <div style="margin-top:20px;">
+                    <div class="action-bar">
                         <button type="submit" class="btn-update">
                             Update Account
                         </button>
