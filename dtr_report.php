@@ -104,40 +104,7 @@ function truncate($text, $chars = 180) {
 <head>
 <meta charset="UTF-8">
 <title>OJT Daily Time Record Report</title>
-<style>
-@page { 
-    size: A4 landscape; 
-    margin: 5mm;
-}
-html, body { height: 100%; margin: 0; padding: 0; font-family: Arial; }
-body { background: #525659; display: flex; justify-content: center; padding-top: 20px; }
-.page-canvas { width: 297mm; background: #fff; padding: 8mm; box-shadow: 0 0 15px rgba(0,0,0,0.3); box-sizing: border-box; }
-table.tbl-main { width: 100%; border-collapse: collapse; }
-thead { display: table-header-group; }
-tfoot { display: table-footer-group; padding-top: -19px; }
-.tbl-main th, .tbl-main td { border: 1px solid #000; font-size: 9pt; word-wrap: break-word; text-align: center; vertical-align: middle; white-space: normal; line-height: 10px; height: 20px; overflow: hidden; text-overflow: ellipsis; }
-.tbl-main td.accomplishment { font-size: 6pt; white-space: normal; word-break: break-word; line-height: 9px; }
-.tbl-main td.signature { font-size: 7pt; white-space: normal; word-break: break-word; line-height: 9px; }
-.tbl-main td[contenteditable="true"] { outline: none; border: 1px solid #000; background: #fff; line-height: 20px; }
-.tbl-main th { background: #eaeaea; font-weight: bold; line-height: 12px; border: 2px solid #000 !important; }
-.days, .day, .total { line-height: 20px !important; }
-.days      { width: 3%; }
-.day      { width: 8%; }
-.total      { width: 4%; }
-.accomplishment { width: 45%; }
-.signature { width: 31%; }
-.iso-header { width: 100%; }
-.header-title { font-size: 14pt; font-weight: bold; text-align: center; background: #eaeaea; border: 1px solid #000; border-bottom: none; padding: 6px; margin-top: 5px; }
-.iso-footer-content { font-size: 8pt; display: flex; justify-content: space-between; }
-.print-btn { position: fixed; top: 20px; right: 40px; z-index: 100; }
-.print-btn button { padding: 10px 20px; cursor: pointer; background: #b9a80eff; color: white; border: none; border-radius: 5px; font-weight: bold; }
-@media print {
-    body { background: none; padding: 0; }
-    .print-btn { display: none; }
-    .page-canvas { width: 100%; box-shadow: none; margin: 0; padding: 5mm; }
-    tr { page-break-inside: avoid; } 
-}
-</style>
+<link rel="stylesheet" href="css/dtr_report.css">
 </head>
 <body>
 
@@ -149,43 +116,43 @@ tfoot { display: table-footer-group; padding-top: -19px; }
     <table class="tbl-main">
         <thead>
             <tr>
-                <td colspan="10" style="border: none; padding: 0;">
+                <td colspan="10" class="no-border no-padding">
                     <div class="iso-header">
-                        <table style="width:100%; border-collapse: collapse;">
+                        <table class="header-info-table">
                             <tr>
-                                <td width="80" style="border: none;">
+                                <td width="80" class="logo-cell">
                                     <img src="assets/logo.png" height="85">
                                 </td>
-                                <td style="border: none; text-align: left; vertical-align: middle; padding-bottom: -10px">
-                                    <span style="font-size: 12pt;"> PAMPANGA STATE AGRICULTURAL UNIVERSITY </span><br>
-                                    <span style="font-size: 10pt; line-height: 1.2rem;"><b> College of Engineering and Computer Studies </b></span>
-                                    <hr style="border: 1px solid black; margin-top: 8px;">
+                                <td class="title-cell">
+                                    <span class="university-name"> PAMPANGA STATE AGRICULTURAL UNIVERSITY </span><br>
+                                    <span class="college-name"><b> College of Engineering and Computer Studies </b></span>
+                                    <hr class="divider">
                                 </td>
                             </tr>
                         </table>
-                        <table style="width:100%; border-collapse: collapse; margin-top: -20px;">
+                        <table class="center-title-table">
                             <tr>
-                                <td style="border: none; text-align: center; vertical-align: middle; padding: 2px;">
-                                    <span style="font-size: 12pt ;"> <b >DAILY TIME RECORD</b> </span><br>
-                                    <span style="font-size: 10pt; line-height: 1.4rem;">FOR THE MONTH OF__________20_____</span>
+                                <td class="center-cell">
+                                    <span class="dtr-title"><b>DAILY TIME RECORD</b></span><br>
+                                    <span class="dtr-subtitle">FOR THE MONTH OF__________20_____</span>
                                 </td>
                             </tr>
                         </table>
-                        <table style="width:100%; border-collapse: collapse; margin-top: 10px;">
+                        <table class="student-info-table">
                             <tr>
-                                <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Student Name: </b><b><u><?= strtoupper(htmlspecialchars($student_info['first_name'] . ' ' . $student_info['last_name'] ?? '________________________________________')) ?></u></b> </span>
+                                <td class="info-cell">
+                                    <span class="info-label"><b>Student Name: </b><b><u><?= strtoupper(htmlspecialchars($student_info['first_name'] . ' ' . $student_info['last_name'] ?? '________________________________________')) ?></u></b></span>
                                 </td>
-                                <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Company: </b><b><u><?= strtoupper(htmlspecialchars($student_info['company'] ?? '____________________________________________________')) ?></u></b> </span>
+                                <td class="info-cell">
+                                    <span class="info-label"><b>Company: </b><b><u><?= strtoupper(htmlspecialchars($student_info['company'] ?? '____________________________________________________')) ?></u></b></span>
                                 </td>
                             </tr>
                             <tr>
-                                <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Course, Yr. & Sec: </b><b><u></u></b> </span>
+                                <td class="info-cell">
+                                    <span class="info-label"><b>Course, Yr. & Sec: </b><b><u></u></b></span>
                                 </td>
-                                <td style="border: none; text-align: left; vertical-align: middle; width: 50%;">
-                                    <span style="font-size: 10pt;"> <b>Department/Office: </b><b><u><?= strtoupper(htmlspecialchars($student_info['department_office'] ?? '_____________________________________________')) ?></u></b> </span>
+                                <td class="info-cell">
+                                    <span class="info-label"><b>Department/Office: </b><b><u><?= strtoupper(htmlspecialchars($student_info['department_office'] ?? '_____________________________________________')) ?></u></b></span>
                                 </td>
                             </tr>
                         </table>
@@ -229,7 +196,7 @@ tfoot { display: table-footer-group; padding-top: -19px; }
                 <td><?= nl2br(htmlspecialchars($row['overtime_in'] ?? '')) ?></td>
                 <td><?= nl2br(htmlspecialchars($row['overtime_out'] ?? '')) ?></td>
                 <td><?= htmlspecialchars($row['daily_total'] ?? '') ?></td>
-                <td class="accomplishment" style="text-align: left;"><?= nl2br(htmlspecialchars($row['accomplishment'] ?? '')) ?></td>
+                <td class="accomplishment text-left"><?= nl2br(htmlspecialchars($row['accomplishment'] ?? '')) ?></td>
                 <td class="signature"><?= nl2br(htmlspecialchars($row['supervisor_signature'] ?? '')) ?></td>
             </tr>
             <?php endfor; ?>
@@ -247,22 +214,22 @@ tfoot { display: table-footer-group; padding-top: -19px; }
                 <td contenteditable="false"></td>
                 <td contenteditable="false"></td>
                 <td contenteditable="false"></td>
-                <td class="accomplishment" contenteditable="true" style="text-align: left;"></td>
+                <td class="accomplishment text-left" contenteditable="true"></td>
                 <td class="signature" contenteditable="true"></td>
             </tr>
             <?php endfor; ?>
         </tbody>
 
-        <tfoot style="border: none; padding: 0; ">
-            <tr style="border: none; padding: 0; margin-top: -10px !important">
-                <td colspan="10" style="border: none; padding: 0; margin-top: -10px !important">
+        <tfoot class="no-border no-padding mt-negative">
+            <tr class="no-border no-padding mt-negative">
+                <td colspan="10" class="no-border no-padding mt-negative">
                     <div class="iso-footer-content">
-                        <span><b> I hereby certify that the above records are true and correct</b> </span>
+                        <span><b> I hereby certify that the above records are true and correct</b></span>
                     </div>
                 </td>
             </tr>
             <tr>
-                <td colspan="10" style="border: none; padding: 0;">
+                <td colspan="10" class="no-border no-padding">
                     <div class="iso-footer-content">
                         <span> PSAU-MIU-SF-03 | 06 (01-30-26) </span>
                     </div>

@@ -1,0 +1,266 @@
+/* ================= DTR REPORT STYLES ================= */
+
+/* Page Setup for Printing */
+@page {
+    size: A4 landscape;
+    margin: 5mm;
+}
+
+/* Base Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+body {
+    background: #525659;
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
+/* Page Canvas */
+.page-canvas {
+    width: 297mm;
+    background: #fff;
+    padding: 8mm;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+/* Main Table */
+table.tbl-main {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    display: table-header-group;
+}
+
+tfoot {
+    display: table-footer-group;
+    padding-top: -19px;
+}
+
+.tbl-main th,
+.tbl-main td {
+    border: 1px solid #000;
+    font-size: 9pt;
+    word-wrap: break-word;
+    text-align: center;
+    vertical-align: middle;
+    white-space: normal;
+    line-height: 10px;
+    height: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tbl-main th {
+    background: #eaeaea;
+    font-weight: bold;
+    line-height: 12px;
+    border: 2px solid #000 !important;
+}
+
+/* Special Cell Types */
+.tbl-main td.accomplishment {
+    font-size: 6pt;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 9px;
+}
+
+.tbl-main td.signature {
+    font-size: 7pt;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 9px;
+}
+
+.tbl-main td[contenteditable="true"] {
+    outline: none;
+    border: 1px solid #000;
+    background: #fff;
+    line-height: 20px;
+}
+
+/* Column Widths */
+.days {
+    width: 3%;
+}
+
+.day {
+    width: 8%;
+}
+
+.total {
+    width: 4%;
+}
+
+.accomplishment {
+    width: 45%;
+}
+
+.signature {
+    width: 31%;
+}
+
+.days,
+.day,
+.total {
+    line-height: 20px !important;
+}
+
+/* ISO Header */
+.iso-header {
+    width: 100%;
+}
+
+.header-title {
+    font-size: 14pt;
+    font-weight: bold;
+    text-align: center;
+    background: #eaeaea;
+    border: 1px solid #000;
+    border-bottom: none;
+    padding: 6px;
+    margin-top: 5px;
+}
+
+/* ISO Footer */
+.iso-footer-content {
+    font-size: 8pt;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Print Button */
+.print-btn {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+    z-index: 100;
+}
+
+.print-btn button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #b9a80eff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+/* No Border Helper */
+.no-border {
+    border: none !important;
+}
+
+/* Header Info Table Styles */
+.header-info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.header-info-table .logo-cell {
+    border: none;
+}
+
+.header-info-table .title-cell {
+    border: none;
+    text-align: left;
+    vertical-align: middle;
+    padding-bottom: -10px;
+}
+
+.header-info-table .title-cell .university-name {
+    font-size: 12pt;
+}
+
+.header-info-table .title-cell .college-name {
+    font-size: 10pt;
+    line-height: 1.2rem;
+}
+
+.header-info-table .title-cell .divider {
+    border: 1px solid black;
+    margin-top: 8px;
+}
+
+/* Center Title Table */
+.center-title-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: -20px;
+}
+
+.center-title-table .center-cell {
+    border: none;
+    text-align: center;
+    vertical-align: middle;
+    padding: 2px;
+}
+
+.center-title-table .dtr-title {
+    font-size: 12pt;
+}
+
+.center-title-table .dtr-subtitle {
+    font-size: 10pt;
+    line-height: 1.4rem;
+}
+
+/* Student Info Table */
+.student-info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.student-info-table .info-cell {
+    border: none;
+    text-align: left;
+    vertical-align: middle;
+    width: 50%;
+}
+
+.student-info-table .info-label {
+    font-size: 10pt;
+}
+
+/* Text Alignment Helpers */
+.text-left {
+    text-align: left !important;
+}
+
+/* Margin Helpers */
+.mt-negative {
+    margin-top: -10px !important;
+}
+
+/* Print Media Queries */
+@media print {
+    body {
+        background: none;
+        padding: 0;
+    }
+
+    .print-btn {
+        display: none;
+    }
+
+    .page-canvas {
+        width: 100%;
+        box-shadow: none;
+        margin: 0;
+        padding: 5mm;
+    }
+
+    tr {
+        page-break-inside: avoid;
+    }
+}

@@ -61,21 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <title><?= $pageTitle; ?></title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-    .btn-back {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 16px;
-        background: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
-    }</style>
+    <link rel="stylesheet" href="css/student_topbar.css">
+    <link rel="stylesheet" href="css/manage_account.css">
 </head>
 <body>
 
@@ -86,44 +73,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="main-content">
 
         <?php include "layout/student_topbar.php"; ?>
-        <div class="content" style="max-width:600px; margin:30px auto;">
-
-            <div class="prev">
-                <h1 style="font-family: 'Nunito', sans-serif;">Manage Account</h1>
-            </div>
+        
+        <div class="account-container">
 
             <?php if ($message): ?>
-                <div class="alert" style="text-align:center; margin-bottom:15px;">
-                    <?= htmlspecialchars($message); ?>
+                <div class="alert-container">
+                    <div class="alert">
+                        <?= htmlspecialchars($message); ?>
+                    </div>
                 </div>
             <?php endif; ?>
 
-            <form method="POST">
+            <div class="form-wrapper">
+                <div class="form-container">
+                    <form method="POST">
 
-                <label>Student Number</label>
-                <input type="text" 
-                       value="<?= htmlspecialchars($student_number); ?>" 
-                       readonly>
+                       <label>Student Number</label>
+                    <input type="text" 
+                           value="<?= htmlspecialchars($student_number); ?>" 
+                           readonly>
 
-                <label>Name</label>
-                <input type="text" 
-                       value="<?= htmlspecialchars($student_name); ?>" 
-                       readonly>
+                    <label>Name</label>
+                    <input type="text" 
+                           value="<?= htmlspecialchars($student_name); ?>" 
+                           readonly>
 
-                <label>Email</label>
-                <input type="email" 
-                       name="email" 
-                       value="<?= htmlspecialchars($student['email'] ?? ''); ?>" 
-                       required>
+                    <label>Email</label>
+                    <input type="email" 
+                           name="email" 
+                           value="<?= htmlspecialchars($student['email'] ?? ''); ?>" 
+                           required>
+                    <div class="button-group">
+                        <button type="submit" class="btn-update">
+                            Update Account
+                        </button>
+                        <a href="daily_time_record.php" class="btn-cancel">Cancel</a>
+                    </div>
 
-                <div style="margin-top:15px;">
-                    <button type="submit">Update Account</button>
-                    <a href="student_time_records.php" class="btn-cancel">
-                        Cancel
-                    </a>
-                </div>
-
-            </form>
+                </form>
+            </div>
 
         </div>
     </div>

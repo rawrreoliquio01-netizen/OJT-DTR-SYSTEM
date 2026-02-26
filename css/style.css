@@ -120,9 +120,9 @@ body {
     background-color: #6c757d;
     color: white;
     padding: 8px 16px;
+    font-size: 18px;
     text-decoration: none;
     border-radius: 6px;
-    font-size: 14px;
     transition: 0.3s;
     display: flex;
     align-items: center;
@@ -139,12 +139,10 @@ body {
     background: #004d26 !important;
     color: #f7f6f6;
     padding: 8px 16px;
-    border: none;
+    font-size: 18px;
+    text-decoration: none;
     border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
     transition: 0.3s;
-    font-weight: 600;
 }
 
 .btn-switch:hover {
@@ -153,19 +151,18 @@ body {
 }
 
 .btn-logout {
-    background-color: #dc3545;
-    color: white;
+    background-color: #da0e0eff;
+    color: #f7f6f6;
     padding: 8px 16px;
+    font-size: 18px;
     text-decoration: none;
     border-radius: 6px;
-    font-size: 14px;
     transition: 0.3s;
 }
 
 .btn-logout:hover {
-    background-color: #c82333;
+    background-color: #ff0000ff ;
     color: white;
-    text-decoration: none;
 }
 
 /* ================= CONTENT ================= */
@@ -215,25 +212,24 @@ label {
 button {
     background: #0e6624;
     color: #f7f7f7;
-    padding: 10px 18px;
+    padding: 8px 16px;
+    font-size: 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: 600;
     box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
 }
-
 
 .btn {
     background: linear-gradient(135deg, #00FF41 0%, #00E636 100%);
     color: #3A3A3A;
-    padding: 10px 18px;
+    padding: 8px 16px;
+    font-size: 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: 600;
     box-shadow: 0 2px 8px rgba(0, 255, 65, 0.2);
 }
 
@@ -360,12 +356,11 @@ h1.welcome {
     background: #004d26 !important;
     color: #fffafa;
     padding: 12px 30px;
-    font-size: 16px;
+    font-size: 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: 600;
     display: flex;
     margin-left: auto;
     margin-top: 1rem;
@@ -381,11 +376,11 @@ h1.welcome {
     background: linear-gradient(135deg, #00FF41 0%, #00E636 100%);
     color: #3A3A3A;
     padding: 10px 20px;
+    font-size: 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: 0.3s;
-    font-weight: 600;
 }
 
 .btn-manage:hover {
@@ -398,15 +393,35 @@ h1.welcome {
     margin-top: -5px;
 }
 
-/* ================= MODAL BUTTON STYLES ================= */
+/* ================= BUTTON BASE STYLES ================= */
+/* All buttons use consistent font styling */
+button,
+.btn,
+.btn-back,
+.btn-switch,
+.btn-logout,
+.btn-update,
+.btn-cancel,
+.btn-manage,
+.btn-generate-report,
+.btn-timeout,
+.time-in,
+.time-out,
+.update-btn,
+.delete-btn {
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 12px 24px;
+}
+
 .modal-content button[type="submit"] {
     background: #004d26 !important;
     color: white !important;
-    font-family: "Nunito", sans-serif;
 }
 
 .modal-content button[type="button"] {
     background: #ff0000 !important;
     color: white !important;
-    font-family: "Nunito", sans-serif;
 }

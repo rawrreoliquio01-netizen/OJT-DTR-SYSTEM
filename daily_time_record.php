@@ -59,92 +59,8 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 <head>
     <title>Daily Time Record</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        .container{ padding: 20px; }
-        .table-container { overflow-x: auto; margin-bottom: 20px; }
-        .table-container table { min-width: 900px; border-collapse: collapse; width:100%; background:white; }
-        .table-container th, .table-container td { padding: 12px; border: 1px solid #ddd; text-align: left; }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-        }
-
-        .modal-content {
-            background: white;
-            margin: 10% auto;
-            padding: 20px;
-            width: 400px;
-            border-radius: 8px;
-            position: relative;
-        }
-
-        .btn-timeout {
-            font-family: 'Nunito', sans-serif;
-            background-color: #da0e0eff;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-timeout:hover {
-            background: #ff0000ff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-        }
-
-        .btn-timeout:disabled {
-            background: #aaa;
-            cursor: not-allowed;
-        }
-
-        .btn-generate-report {
-            font-family: 'Nunito', sans-serif;
-            background: #0c0fb9ff !important;
-            color: #fffafa;
-            padding: 12px 30px;
-            font-size: 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-weight: 600;
-            display: flex;
-            margin-left: auto;
-            margin-top: 1rem;
-        }
-
-        .btn-generate-report:hover {
-            background: #1946dbff !important;
-            color: #f7f6f6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-        }
-
-        textarea {
-            font-family: 'Nunito', sans-serif;
-            width: 100%;
-            height: 100px;
-            margin-top: 10px;
-            padding: 10px;
-            box-sizing: border-box;
-            resize: none;
-        }
-
-        .overtime {
-            color: red;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="css/student_topbar.css">
+    <link rel="stylesheet" href="css/daily_time_record.css">
 </head>
 <body>
 
@@ -153,13 +69,13 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
     <div class="main-content">
         <?php include "layout/student_topbar.php"; ?>
 
-        <div class="container">
+        <div class="dtr-container">
             <button onclick="window.location.href='dtr_report.php'" class="btn-generate-report">
                 Generate Record
             </button>
 
             <div class="prev">
-                <h1 style="font-family: 'Nunito', sans-serif;">Previous Records</h1>
+                <h1>Previous Records</h1>
             </div>
 
             <div class="table-container">
@@ -264,7 +180,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 <!-- TIMEOUT MODAL -->
 <div id="timeoutModal" class="modal">
     <div class="modal-content">
-        <h3 style="font-family: 'Nunito', sans-serif;">Write / Edit Accomplishment</h3>
+        <h3>Write / Edit</h3>
         <form method="POST" id="timeoutForm">
             <input type="hidden" name="session_id" id="modal_session_id">
             <input type="hidden" name="record_id" id="modal_record_id">
@@ -273,12 +189,8 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 
             <br><br>
 
-            <button type="submit" class="btn-timeout" style="font-family: 'Nunito', sans-serif; transition: all 0.3s;"
-                    onmouseover="this.style.background='#003d1e'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0, 77, 38, 0.3)';"
-                    onmouseout="this.style.background='#004d26'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Save</button>
-            <button type="button" onclick="closeModal()" style="font-family: 'Nunito', sans-serif; background:#ff0000; color:white; border:none; padding:8px 12px; border-radius:4px; transition:all 0.3s; cursor:pointer;"
-                    onmouseover="this.style.background='#cc0000'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(255, 0, 0, 0.3)';"
-                    onmouseout="this.style.background='#ff0000'; this.style.transform='translateY(0)'; this.style.boxShadow='none';">Cancel</button>
+            <button type="submit" class="btn-timeout">Save</button>
+            <button type="button" onclick="closeModal()" class="btn-cancel">Cancel</button>
         </form>
     </div>
 </div>
