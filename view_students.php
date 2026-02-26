@@ -17,7 +17,13 @@ $students = $conn->query("
 <html>
 <head>
     <title>View Students</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/sidebar.css">
+    <link rel="stylesheet" href="css/topbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/tables.css">
+    <link rel="stylesheet" href="css/buttons.css">
 </head>
 <body>
 
@@ -30,7 +36,7 @@ $students = $conn->query("
 
             <h2>OJT Students</h2>
 
-            <div class="actions" style="margin-bottom:15px;">
+            <div class="actions filter-actions">
                 <label>Filter by College / Department:</label>
                 <select id="filter_college">
                     <option value="" selected>All</option>

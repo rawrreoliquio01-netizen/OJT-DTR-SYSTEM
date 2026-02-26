@@ -81,103 +81,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save'])) {
 <html>
 <head>
 <title>PSAU OJT DTR</title>
-<link rel="stylesheet" href="css/style.css">
-<style>
-/* Your previous styles unchanged */
-body{background:#F5F1E8;margin:0;padding:0;}
-.header{display:flex;justify-content:space-between;align-items:center;padding:15px 30px;background:#E8E1D5;box-shadow:0 2px 5px rgba(0,0,0,0.1);border-bottom:3px solid transparent;background-image:linear-gradient(#E8E1D5, #E8E1D5), linear-gradient(90deg, #FFD700, #FFEB3B, #FFD700);background-origin:border-box;background-clip:padding-box, border-box;background-repeat:no-repeat;background-position:0 0, 0 100%;background-size:100% 100%, 100% 3px;}
-.header a{text-decoration:none;padding:10px 20px;background:#004d26;color:#fff;border-radius:5px;}
-.header a:hover{background:#0056b3;}
-.container{max-width:1200px;margin:60px auto;background:#fff;padding:50px;border-radius:15px;box-shadow:0 8px 32px rgba(0,0,0,0.1);position:relative;min-height:500px;}
-.clock-widget{position:absolute;top:80px;left:140px;z-index:10;}
-.main-content{margin-left:480px;max-width:520px;padding:50px;background:#f9f9f9;border-radius:10px;}
-.container h2{text-align:center;margin-bottom:20px;}
-.container form label{display:block;margin-top:10px;margin-bottom:5px;}
-.container form input, .container form select, .container form textarea{width:100%;padding:12px;border-radius:8px;border:1px solid #ddd;box-sizing:border-box;transition:border-color 0.3s;}
-.container form input:focus, .container form select:focus, .container form textarea:focus{border-color:#007bff;outline:none;}
-.container form button{width:100%;margin-top:20px;padding:15px;background:#004d26;color:#fff;border:none;border-radius:8px;cursor:pointer;transition:background 0.3s;}
-.container form button:hover{background:#218838;}
-.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;}
-.modal-content{background:#fff;padding:30px;border-radius:15px;width:450px;box-shadow:0 12px 48px rgba(0,0,0,0.3);animation:slideIn 0.3s ease-out;position:relative;z-index:10000;}
-.modal-content button{padding:10px 20px;margin-right:10px;border:none;border-radius:8px;cursor:pointer;transition:all 0.3s;}
-.modal-content button:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
-@keyframes slideIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
-
-.btn-switch {
-    background: #004d26;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-switch:hover {
-    background: #003d1e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-}
-
-.btn-login {
-    background: #004d26;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-login:hover {
-    background: #003d1e;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
-}
-
-.btn-cancel {
-    background: #ff0000;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.btn-cancel:hover {
-    background: #cc0000;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
-}
-</style>
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/forms.css">
+<link rel="stylesheet" href="css/buttons.css">
+<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 
-<div class="header"><h2 style="font-family: 'Nunito', sans-serif;">PSAU OJT DTR</h2><button onclick="openLoginModal()" class="btn-switch">Login</button></div>
-
-
+<div class="header"><h2 class="header-title">PSAU OJT DTR</h2><button onclick="openLoginModal()" class="btn-switch">Login</button></div>
 
 <div class="container">
     <div class="clock-widget">
         <iframe src="https://free.timeanddate.com/clock/iaagilca/n3357/szw300/szh300/cf100/hnce1ead6" frameborder="0" width="300" height="300"></iframe>
-        <div style="margin-top: 35px; text-align: center;">
+        <div class="clock-time-container">
             <iframe src="https://free.timeanddate.com/clock/iaagj3fz/n3357/fs26" frameborder="0" width="209" height="33"></iframe>
         </div>
     </div>
 
     <div class="main-content">
-        <h2 style="font-family: 'Nunito', sans-serif;">Welcome to I-Café!</h2>
+        <h2 class="welcome-title">Welcome to I-Café!</h2>
         <form method="POST">
             <label>Student Number</label>
             <input type="text" name="student_number" required>
             <button type="submit" name="save" class="btn-switch">Save</button>
         </form>
 
-        <p style="font-family: 'Nunito', sans-serif; text-align:center;margin-top:30px;">Current Period: <b><?= $currentPeriod ?></b></p>
+        <p class="period-text">Current Period: <b><?= $currentPeriod ?></b></p>
 
         <?php if(isset($_SESSION['flash_message'])): ?>
-        <p style="font-family: 'Nunito', sans-serif; text-align:center;color:green;font-weight:bold;">
+        <p class="flash-message">
             <?= htmlspecialchars($_SESSION['flash_message']) ?>
         </p>
         <?php unset($_SESSION['flash_message']); ?>
@@ -185,16 +118,15 @@ body{background:#F5F1E8;margin:0;padding:0;}
     </div>
 </div>
 
-<div id="switchAccountModal" style="display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7);">
-    <div style="background: white; margin: 12% auto; padding: 30px; width: 350px; border-radius: 15px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-        <h3 style="font-family: 'Nunito', sans-serif; margin-top: 0; color: #2c3e50;">Log to your Account</h3>
-        <p style="font-family: 'Nunito', sans-serif; color: #7f8c8d; font-size: 14px;">Please enter your Student Number:</p>
+<div id="switchAccountModal" class="switch-account-modal">
+    <div class="modal-box">
+        <h3 class="modal-title">Log to your Account</h3>
+        <p class="modal-subtitle">Please enter your Student Number:</p>
         
         <form action="switch_handler.php" method="POST">
-            <input type="text" name="new_student_number" required placeholder="Student Number (e.g. 202100919)" 
-                   style="font-family: 'Nunito', sans-serif; width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box;">
+            <input type="text" name="new_student_number" required placeholder="Student Number (e.g. 202100919)" class="modal-input">
             
-            <div style="display: flex; gap: 10px;">
+            <div class="modal-actions">
                 <button class="btn-login btn-switch" type="submit">Login</button>
                 <button class="btn-cancel" type="button" onclick="closeLoginModal()">Cancel</button>
             </div>

@@ -1,0 +1,29 @@
+/* =========================
+   GLOBAL BASE STYLES
+   ========================= */
+
+/* Color Palette */
+:root {
+    --beige: #f9fff7;
+    --dark-beige: #fffef3;
+    --bright-green: #00FF41;
+    --vibrant-green: #00E636;
+    --yellow: #FFD700;
+    --bright-yellow: #FFEB3B;
+    --dark-text: #3A3A3A;
+    --primary-green: #004d26;
+}
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    font-family: "Nunito", sans-serif;
+    background-color: var(--beige);
+    color: var(--dark-text);
+}

@@ -1,0 +1,28 @@
+/* =========================
+   TABLE STYLES
+   ========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+th {
+    background: var(--primary-green);
+    color: #ffffff;
+    text-align: left;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #F9F6EE;
+}
