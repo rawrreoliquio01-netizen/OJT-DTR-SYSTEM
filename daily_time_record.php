@@ -109,7 +109,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 
         .btn-generate-report {
             font-family: 'Nunito', sans-serif;
-            background: #004d26;
+            background: #0c0fb9ff !important;
             color: #fffafa;
             padding: 12px 30px;
             font-size: 16px;
@@ -124,7 +124,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
         }
 
         .btn-generate-report:hover {
-            background: #218838 !important;
+            background: #1946dbff !important;
             color: #f7f6f6;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
@@ -155,7 +155,7 @@ $records = $conn->query("SELECT * FROM time_records WHERE student_number='$stude
 
         <div class="container">
             <button onclick="window.location.href='dtr_report.php'" class="btn-generate-report">
-                Generate DTR Record
+                Generate Record
             </button>
 
             <div class="prev">
