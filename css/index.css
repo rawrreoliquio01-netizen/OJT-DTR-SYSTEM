@@ -1,0 +1,271 @@
+/* ================= INDEX PAGE STYLES ================= */
+
+/* Base */
+body {
+    background: #F5F1E8;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: #E8E1D5;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid transparent;
+    background-image: linear-gradient(#E8E1D5, #E8E1D5), linear-gradient(90deg, #FFD700, #FFEB3B, #FFD700);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-repeat: no-repeat;
+    background-position: 0 0, 0 100%;
+    background-size: 100% 100%, 100% 3px;
+}
+
+.header h2 {
+    font-family: "Nunito", sans-serif;
+}
+
+.header a {
+    text-decoration: none;
+    padding: 10px 20px;
+    background: #004d26;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.header a:hover {
+    background: #0056b3;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 60px auto;
+    background: #fff;
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    position: relative;
+    min-height: 500px;
+}
+
+/* Clock Widget */
+.clock-widget {
+    position: absolute;
+    top: 80px;
+    left: 140px;
+    z-index: 10;
+}
+
+.clock-widget iframe {
+    border: none;
+}
+
+.clock-widget .date-container {
+    margin-top: 35px;
+    text-align: center;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 480px;
+    max-width: 520px;
+    padding: 50px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.main-content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Nunito", sans-serif;
+}
+
+/* Form Styles */
+.main-content form label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.main-content form input,
+.main-content form select,
+.main-content form textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.main-content form input:focus,
+.main-content form select:focus,
+.main-content form textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.main-content form button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background: #004d26;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.main-content form button:hover {
+    background: #218838;
+}
+
+/* Info Text */
+.info-text {
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.success-message {
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    color: green;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    width: 450px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+    position: relative;
+    z-index: 10000;
+}
+
+.modal-content h3 {
+    font-family: "Nunito", sans-serif;
+    margin-top: 0;
+    color: #2c3e50;
+}
+
+.modal-content p {
+    font-family: "Nunito", sans-serif;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.modal-content input {
+    font-family: "Nunito", sans-serif;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.modal-content .modal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-content button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Buttons */
+.btn-switch {
+    background: #004d26;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-switch:hover {
+    background: #003d1e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
+}
+
+.btn-login {
+    background: #004d26;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-login:hover {
+    background: #003d1e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 77, 38, 0.3);
+}
+
+.btn-cancel {
+    background: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-cancel:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+/* Login Modal Specific */
+#switchAccountModal {
+    display: none;
+}
